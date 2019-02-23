@@ -176,7 +176,7 @@ function searchColumnsForWinner(colIndex, grid) {
 }
 
 /**
- * Scan the left diagonal from the left top right bottom
+ * Scan the left diagonal from the left top to the right bottom
  * @param {Array[][]} grid 
  */
 function searchLeftDiagonal(grid) {
