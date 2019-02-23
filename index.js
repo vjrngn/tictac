@@ -109,8 +109,8 @@ function onBoxClick() {
         }
     }
 
-    for (let j = 0; j < GRID_LENGTH; j++) {
-        let winner = searchColumnsForWinner(j, grid);
+    for (let index = 0; index < GRID_LENGTH; index++) {
+        let winner = searchColumnsForWinner(index, grid);
 
         if (winner > 0) {
             displayWinner(winner);
@@ -119,13 +119,20 @@ function onBoxClick() {
     }
 
     // search left and right diagonals
-    let left = searchLeftDiagonal();
-    let right = searchRightDiagonal();
+    let left = searchLeftDiagonal(grid);
+    let right = searchRightDiagonal(grid);
 
     if (left > 0) {
         displayWinner(left);
     } else if (right > 0) {
         displayWinner(right);
+    }
+}
+
+function addClickHandlers() {
+    var boxes = document.getElementsByClassName("box");
+    for (var idx = 0; idx < boxes.length; idx++) {
+        boxes[idx].addEventListener('click', onBoxClick, false);
     }
 }
 
@@ -143,6 +150,11 @@ function displayWinner(winner) {
     winnerBanner.innerHTML = winner === 1 ? playerOneWinnerText : computerWinnerText;
 }
 
+/**
+ * Scan each column and check if there exists a winner
+ * @param {Number} colIndex 
+ * @param {Array[][]} grid 
+ */
 function searchColumnsForWinner(colIndex, grid) {
     let itemsInCol = [];
 
@@ -163,7 +175,11 @@ function searchColumnsForWinner(colIndex, grid) {
     }
 }
 
-function searchLeftDiagonal() {
+/**
+ * Scan the left diagonal from the left top right bottom
+ * @param {Array[][]} grid 
+ */
+function searchLeftDiagonal(grid) {
     let rowIndex = 0;
     let colIndex = 0;
     let itemsInDiagonal = [];
@@ -185,7 +201,11 @@ function searchLeftDiagonal() {
     }
 }
 
-function searchRightDiagonal() {
+/**
+ * Scan the right diagonal from the right top to the left bottom
+ * @param {Array[][]} grid 
+ */
+function searchRightDiagonal(grid) {
     let rowIndex = 0;
     let colIndex = GRID_LENGTH - 1;
     let itemsInDiagonal = [];
@@ -204,13 +224,6 @@ function searchRightDiagonal() {
         return 2;
     } else {
         return 0;
-    }
-}
-
-function addClickHandlers() {
-    var boxes = document.getElementsByClassName("box");
-    for (var idx = 0; idx < boxes.length; idx++) {
-        boxes[idx].addEventListener('click', onBoxClick, false);
     }
 }
 
