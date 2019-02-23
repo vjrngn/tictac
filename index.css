@@ -50,3 +50,18 @@
     border-radius: 5px;
     line-height: 100px;
 }
+
+.winner {
+    background: lightgreen;
+    color: darkgreen;
+    text-align: center;
+    padding: 24px;
+    width: 250px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    margin: 0 auto;
+}
+
+.hidden {
+    visibility: hidden;
+}
